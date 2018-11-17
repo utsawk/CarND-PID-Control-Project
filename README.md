@@ -1,6 +1,19 @@
 # CarND-Controls-PID
 Self-Driving Car Engineer Nanodegree Program
 
+## Project rubric
+Getting the code right to work is easy for the project - only a few lines of code is needed.
+### Effect of P, I and D
+* The Proportional (P) part of the controller is used to keep the car in the center of the road. No matter what P value I tried, the car begins overshooting the center line before finally stabilizing to stay almost around the center line for the rest of the track. Higher values of P causes the car to oscillate more. A lower value causes it to not reach soon enough at high speeds and veer to the side of the road.
+
+* The Intergral (I) part of the controller is used to deal with cross track errors (distance from the center) caused systematic biases in the system. Keeping a higher value quickly takes the car out of the track. This is not surprising because the integral term really adds up quickly initially and even a mdoerate value of this coefficient can take the car off the track very quickly. A small value for this coefficient is needed.
+
+* The Differential (D) part of the controller is used to deal with frequent oscillations around the center of the road. Since we look at differences in cross track errors and apply the D coefficient, this coefficient is the highest of the three. It dampens the oscillations and the car drives around the center of the road smoothly.
+
+### Tuning parameters
+This is the most difficult part of the project. The performance of the controller is heavily dependent on the coefficients. I implemented Twiddle but it did not work well enough for me if I started with arbitrary initial values - it was touching the yellow lines too often. Using the values from lecture gives good performance and I have manually tuned values for the final submission. Decreasing the integral term helps in reducing oscillations overall because I don't think there is too much bias in the simulator (at least it feels that way on my machine).
+
+
 ---
 
 ## Dependencies
